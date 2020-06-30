@@ -7,6 +7,7 @@
 #
 
 """Version information for BDC-Auth-Client.
+
 This file is imported by ``bdc_auth_client.__init__``,
 and parsed by ``setup.py``.
 """
