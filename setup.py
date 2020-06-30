@@ -45,9 +45,10 @@ setup_requires = [
 ]
 
 install_requires = [
+    'cacheout>=0.11,<1',
+    'Flask>=1.1',
     'Authlib>=0.14',
     'requests>=2.20',
-    'requests-oauth>=0.4',
 ]
 
 packages = find_packages()
