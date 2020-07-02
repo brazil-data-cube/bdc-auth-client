@@ -21,7 +21,6 @@ from cacheout.cache import Cache
 # Used to prevent `fetch_token` all the time.
 token_cache = Cache(maxsize=512, ttl=3600)
 
-
 def oauth2_required(roles=None):
     """Decorate a Flask route to connect with BDC-Auth Provider.
 
@@ -32,7 +31,6 @@ def oauth2_required(roles=None):
     - ``BDC_AUTH_CLIENT_ID``: Application Client Id
     - ``BDC_AUTH_CLIENT_SECRET``: Application Client Secret
     - ``BDC_AUTH_ACCESS_TOKEN_URL``: URL to BDC-Auth Provider Token
-    - ``BDC_AUTH_RESOURCE_URL``: URL to the Resource Server Profile.
 
     Example:
         >>> from bdc_auth_client.decorators import oauth2_required
@@ -57,18 +55,18 @@ def oauth2_required(roles=None):
                 )
                 try:
                     res = session.fetch_token(
-                        current_app.config['BDC_AUTH_ACCESS_TOKEN_URL'], grant_type='personal_access_token', access_token=access_token)
-                    if 'access_token' not in res:
+                        current_app.config['BDC_AUTH_ACCESS_TOKEN_URL'], grant_type='introspect', token=access_token)
+
+                    if 'code' in res:
                         abort(403)
 
                     if roles:
-                        headers = dict(Authorization=f'Bearer {res["access_token"]}')
-                        profile = requests.get(current_app.config['BDC_AUTH_RESOURCE_URL'],headers=headers).json()['users']
+                        user_roles = res['sub']['roles'] or []
 
-                        if profile['roles'] and not set(roles) <= set(profile['roles']):
+                        if not set(roles) <= set(user_roles):
                             abort(403)
 
-                    token_cache.add(access_token, dict(profile=profile, access_token=res['access_token']), ttl=res['expires_in'])
+                    token_cache.add(access_token, res, ttl=res['exp'])
                 except Exception as e:
                     abort(403)
             return func(*args, **kwargs)
