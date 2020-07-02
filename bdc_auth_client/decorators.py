@@ -54,8 +54,17 @@ def oauth2_required(roles=None):
                     token_endpoint_auth_method='client_secret_basic',
                 )
                 try:
+                    # Set policy to access the `BDC-Auth`
+                    # A policy is associated with Roles.
+                    policy = None
+
+                    if roles:
+                        policy = ','.join(roles)
+
                     res = session.fetch_token(
-                        current_app.config['BDC_AUTH_ACCESS_TOKEN_URL'], grant_type='introspect', token=access_token)
+                        current_app.config['BDC_AUTH_ACCESS_TOKEN_URL'], grant_type='introspect',
+                        token=access_token, policy=policy
+                    )
 
                     if 'code' in res:
                         abort(403)
