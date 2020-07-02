@@ -66,7 +66,7 @@ def oauth2_required(roles=None):
                         if not set(roles) <= set(user_roles):
                             abort(403)
 
-                    token_cache.add(access_token, res, ttl=res['exp'])
+                    token_cache.add(access_token, res, ttl=3600)
                 except Exception as e:
                     abort(403)
             return func(*args, **kwargs)
