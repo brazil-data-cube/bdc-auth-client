@@ -21,7 +21,8 @@ from cacheout.cache import Cache
 # Used to prevent `fetch_token` all the time.
 token_cache = Cache(maxsize=512, ttl=3600)
 
-def oauth2_required(roles=None):
+
+def oauth2_required(roles=None, required=True):
     """Decorate a Flask route to connect with BDC-Auth Provider.
 
     You can specify user roles required to access a resource.
@@ -37,7 +38,7 @@ def oauth2_required(roles=None):
         >>>
         >>> @app.route('/')
         >>> @oauth2_required(roles=['admin'])
-        >>> def protected_route():
+        >>> def protected_route(roles=[]):
         ...     return dict(status=200)
     """
     def _oauth2_required(func):
@@ -45,7 +46,9 @@ def oauth2_required(roles=None):
         def wrapped(*args, **kwargs):
             access_token = request.args.get('access_token')
             if not access_token:
-                abort(400, 'Missing access_token parameter.')
+                if required:
+                    abort(400, 'Missing access_token parameter.')
+                return func(*args, **kwargs)
 
             if not token_cache.has(access_token):
                 session = OAuth2Session(
@@ -69,13 +72,14 @@ def oauth2_required(roles=None):
                     if 'code' in res:
                         abort(403)
 
+                    kwargs.update(dict(roles=res['sub']['roles']))
                     if roles:
                         user_roles = res['sub']['roles'] or []
 
                         if not set(roles) <= set(user_roles):
                             abort(403)
 
-                    token_cache.add(access_token, res, ttl=3600)
+                    token_cache.add(access_token, res, ttl=60)
                 except Exception as e:
                     abort(403)
             return func(*args, **kwargs)
