@@ -38,7 +38,7 @@ def oauth2_required(roles=None, required=True):
         >>>
         >>> @app.route('/')
         >>> @oauth2_required(roles=['admin'])
-        >>> def protected_route():
+        >>> def protected_route(roles=[]):
         ...     return dict(status=200)
     """
     def _oauth2_required(func):
