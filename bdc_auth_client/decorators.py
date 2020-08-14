@@ -22,7 +22,7 @@ from cacheout.cache import Cache
 token_cache = Cache(maxsize=512, ttl=3600)
 
 
-def oauth2_required(roles=None, required=True):
+def oauth2(roles=None, required=True):
     """Decorate a Flask route to connect with BDC-Auth Provider.
 
     You can specify user roles required to access a resource.
@@ -34,14 +34,14 @@ def oauth2_required(roles=None, required=True):
     - ``BDC_AUTH_ACCESS_TOKEN_URL``: URL to BDC-Auth Provider Token
 
     Example:
-        >>> from bdc_auth_client.decorators import oauth2_required
+        >>> from bdc_auth_client.decorators import oauth2
         >>>
         >>> @app.route('/')
-        >>> @oauth2_required(roles=['admin'])
+        >>> @oauth2(roles=['admin'])
         >>> def protected_route(roles=[]):
         ...     return dict(status=200)
     """
-    def _oauth2_required(func):
+    def _oauth2(func):
         @wraps(func)
         def wrapped(*args, **kwargs):
             access_token = request.args.get('access_token')
@@ -73,6 +73,7 @@ def oauth2_required(roles=None, required=True):
                         abort(403)
 
                     kwargs.update(dict(roles=res['sub']['roles']))
+                    kwargs.update(dict(access_token=access_token))
                     if roles:
                         user_roles = res['sub']['roles'] or []
 
@@ -84,4 +85,4 @@ def oauth2_required(roles=None, required=True):
                     abort(403)
             return func(*args, **kwargs)
         return wrapped
-    return _oauth2_required
+    return _oauth2
