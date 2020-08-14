@@ -50,7 +50,12 @@ def oauth2(roles=None, required=True):
                     abort(400, 'Missing access_token parameter.')
                 return func(*args, **kwargs)
 
-            if not token_cache.has(access_token):
+            if token_cache.has(access_token):
+                res = token_cache.get(access_token)
+                kwargs.update(dict(roles=res['sub']['roles']))
+                kwargs.update(dict(access_token=access_token))
+
+            else:
                 session = OAuth2Session(
                     client_id=current_app.config['BDC_AUTH_CLIENT_ID'],
                     client_secret=current_app.config['BDC_AUTH_CLIENT_SECRET'],
