@@ -44,7 +44,8 @@ def oauth2(roles=None, required=True):
     def _oauth2(func):
         @wraps(func)
         def wrapped(*args, **kwargs):
-            access_token = request.args.get('access_token')
+            access_token = request.headers['x-api-key'] if request.headers.get('x-api-key') else \
+                            request.args.get('access_token')
             if not access_token:
                 if required:
                     abort(400, 'Missing access_token parameter.')
