@@ -76,11 +76,9 @@ def oauth2(roles=None, required=True, throw_exception=True):
                         abort(403)
 
                     user_roles = res['sub']['roles'] or []
-                    kwargs.update(dict(roles=res['sub']['roles']))
+                    kwargs.update(dict(roles=user_roles))
                     kwargs.update(dict(access_token=access_token))
                     if roles:
-                        user_roles = res['sub']['roles'] or []
-
                         if not set(roles) <= set(user_roles):
                             abort(403)
 
