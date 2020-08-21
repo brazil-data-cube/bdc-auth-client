@@ -1,6 +1,6 @@
 ..
     This file is part of BDC-Auth-Client.
-    Copyright (C) 2019-2020 INPE.
+    Copyright (C) 2020 INPE.
 
     BDC-Auth-Client is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
@@ -15,26 +15,42 @@ A Client Package for Authentication and Authorization Based on OAuth 2.0
         :target: https://github.com//brazil-data-cube/bdc-auth-client/blob/master/LICENSE
         :alt: Software License
 
+
+.. image:: https://travis-ci.org/brazil-data-cube/bdc-auth-client.svg?branch=master
+        :target: https://travis-ci.org/brazil-data-cube/bdc-auth-client
+        :alt: Build Status
+
+
+.. image:: https://coveralls.io/repos/github/brazil-data-cube/bdc-auth-client/badge.svg?branch=master
+        :target: https://coveralls.io/github/brazil-data-cube/bdc-auth-client?branch=master
+        :alt: Code Coverage Test
+
+
 .. image:: https://readthedocs.org/projects/bdc-auth-client/badge/?version=latest
         :target: https://bdc-auth-client.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
+
 
 .. image:: https://img.shields.io/badge/lifecycle-experimental-orange.svg
         :target: https://www.tidyverse.org/lifecycle/#experimental
         :alt: Software Life Cycle
 
+
 .. image:: https://img.shields.io/github/tag/brazil-data-cube/bdc-auth-client.svg
         :target: https://github.com/brazil-data-cube/bdc-auth-client/releases
         :alt: Release
 
-.. image:: https://badges.gitter.im/brazil-data-cube/community.svg/
-        :target: https://gitter.im/brazil-data-cube/community#
-        :alt: Join the chat
+
+.. image:: https://img.shields.io/discord/689541907621085198?logo=discord&logoColor=ffffff&color=7389D8
+        :target: https://discord.com/channels/689541907621085198#
+        :alt: Join us at Discord
 
 
 About
 =====
 
+
+BDC-Auth-Client is a client package for authentication and authorization based on OAuth 2.0.
 
 
 Installation
@@ -48,7 +64,7 @@ Running
 =======
 
 
-See `RUNNING.rst <./RUNNING.rst>`_.
+See `USING.rst <./USING.rst>`_.
 
 
 Developer Documentation
@@ -61,8 +77,9 @@ See https://bdc-auth-client.readthedocs.io/en/latest.
 License
 =======
 
+
 .. admonition::
-    Copyright (C) 2019-2020 INPE.
+    Copyright (C) 2020 INPE.
 
     BDC-Auth-Client is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.

@@ -1,6 +1,6 @@
 ..
     This file is part of BDC-Auth-Client.
-    Copyright (C) 2019-2020 INPE.
+    Copyright (C) 2020 INPE.
 
     BDC-Auth-Client is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
@@ -9,10 +9,12 @@
 Changes
 =======
 
-Version 0.2.0
----------------
 
-Released 2020-06-26
+Version 0.2.0
+-------------
+
+
+Released 2020-08-20
 
 - First experimental version.
 - Based on `BDC-Auth <https://github.com/brazil-data-cube/bdc-auth>`_.
@@ -20,7 +22,6 @@ Released 2020-06-26
 - Based on `Authlib <https://authlib.org/>`_.
 - Documentation system based on Sphinx.
 - Package support through Setuptools.
-- Deploy on Docker containers.
-- Installation, deployment and running instructions.
+- Installation instructions.
 - Source code versioning based on `Semantic Versioning 2.0.0 <https://semver.org/>`_.
-- License: `MIT <https://github.com/brazil-data-cube/bdc-auth/blob/master/LICENSE>`_.
+- License: `MIT <https://github.com/brazil-data-cube/bdc-auth-client/blob/master/LICENSE>`_.
