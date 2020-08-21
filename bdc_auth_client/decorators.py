@@ -1,6 +1,6 @@
 #
 # This file is part of BDC-Auth-Client.
-# Copyright (C) 2019-2020 INPE.
+# Copyright (C) 2020 INPE.
 #
 # BDC-Auth-Client is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -10,12 +10,9 @@
 
 from functools import wraps
 
-import requests
 from authlib.integrations.requests_client import OAuth2Session
-from authlib.oauth2.rfc6749 import ClientAuthentication
-from flask import abort, current_app, request
-
 from cacheout.cache import Cache
+from flask import abort, current_app, request
 
 # Define a InMemory cache for development purporse
 # Used to prevent `fetch_token` all the time.

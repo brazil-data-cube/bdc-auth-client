@@ -1,14 +1,15 @@
 #
 # This file is part of BDC-Auth-Client.
-# Copyright (C) 2019-2020 INPE.
+# Copyright (C) 2020 INPE.
 #
 # BDC-Auth-Client is a free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""BDC-Auth-Client"""
+"""BDC-Auth-Client is a client package for authentication and authorization based on OAuth 2.0."""
 
 import os
+
 from setuptools import find_packages, setup
 
 readme = open('README.rst').read()
@@ -37,7 +38,7 @@ extras_require = {
     'tests': tests_require,
 }
 
-extras_require['all'] = [req for exts, reqs in extras_require.items()
+extras_require['all'] = [req for _, reqs in extras_require.items()
                          for req in reqs]
 
 setup_requires = [
@@ -65,8 +66,8 @@ setup(
     long_description=readme + '\n\n' + history,
     keywords=['user authentication', 'authorization system', 'OAuth 2.0'],
     license='MIT',
-    author='INPE',
-    author_email='brazildatacube@dpi.inpe.br',
+    author='Brazil Data Cube Team',
+    author_email='brazildatacube@inpe.br',
     url='https://github.com/brazil-data-cube/bdc-auth-client',
     packages=packages,
     zip_safe=False,
@@ -79,7 +80,7 @@ setup(
     entry_points={
     },
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
