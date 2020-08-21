@@ -19,7 +19,7 @@ from flask import abort, current_app, request
 token_cache = Cache(maxsize=512, ttl=3600)
 
 
-def oauth2(roles=None, required=True):
+def oauth2(roles=None, required=True, throw_exception=True):
     """Decorate a Flask route to connect with BDC-Auth Provider.
 
     You can specify user roles required to access a resource.
@@ -45,7 +45,7 @@ def oauth2(roles=None, required=True):
                             request.args.get('access_token')
             if not access_token:
                 if required:
-                    abort(400, 'Missing access_token parameter.')
+                    abort(403, 'Missing access_token parameter.')
                 return func(*args, **kwargs)
 
             if token_cache.has(access_token):
@@ -75,6 +75,7 @@ def oauth2(roles=None, required=True):
                     if 'code' in res:
                         abort(403)
 
+                    user_roles = res['sub']['roles'] or []
                     kwargs.update(dict(roles=res['sub']['roles']))
                     kwargs.update(dict(access_token=access_token))
                     if roles:
@@ -85,7 +86,8 @@ def oauth2(roles=None, required=True):
 
                     token_cache.add(access_token, res, ttl=60)
                 except Exception as e:
-                    abort(403)
+                    if throw_exception:
+                        abort(403)
             return func(*args, **kwargs)
         return wrapped
     return _oauth2
