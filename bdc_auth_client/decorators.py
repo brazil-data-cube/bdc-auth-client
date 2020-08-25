@@ -50,7 +50,7 @@ def oauth2(roles=None, required=True, throw_exception=True):
 
             if token_cache.has(access_token):
                 res = token_cache.get(access_token)
-                kwargs.update(dict(roles=res['sub']['roles']))
+                kwargs.update(dict(roles=res['sub']['roles'] or []))
                 kwargs.update(dict(access_token=access_token))
 
             else:
