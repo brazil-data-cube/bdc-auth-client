@@ -10,6 +10,16 @@ Changes
 =======
 
 
+Version 0.2.1
+-------------
+
+
+Released 2020-08-26
+
+- Bug Fix in decorator oauth2: See `commit aa436 <https://github.com/brazil-data-cube/bdc-auth-client/commit/aa43602d25063678e69ba6ff6bd84653a7b20e2b>`_.
+
+
+
 Version 0.2.0
 -------------
 
