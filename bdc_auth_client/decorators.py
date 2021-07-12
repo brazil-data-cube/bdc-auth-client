@@ -52,6 +52,7 @@ def oauth2(roles=None, required=True, throw_exception=True):
                 res = token_cache.get(access_token)
                 kwargs.update(dict(roles=res['sub']['roles'] or []))
                 kwargs.update(dict(access_token=access_token))
+                kwargs.update(dict(user_id=res.get('user_id', None)))
 
             else:
                 session = OAuth2Session(
@@ -78,6 +79,8 @@ def oauth2(roles=None, required=True, throw_exception=True):
                     user_roles = res['sub']['roles'] or []
                     kwargs.update(dict(roles=user_roles))
                     kwargs.update(dict(access_token=access_token))
+                    kwargs.update(dict(user_id=res.get('user_id', None)))
+
                     if roles:
                         if not set(roles) <= set(user_roles):
                             abort(403)
