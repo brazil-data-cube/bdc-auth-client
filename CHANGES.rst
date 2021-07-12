@@ -10,21 +10,24 @@ Changes
 =======
 
 
-Version 0.2.1
--------------
+Version 0.2.2 (2021-07-12)
+--------------------------
 
 
-Released 2020-08-26
+- Retrieve user id in decorators `#20 <https://github.com/brazil-data-cube/bdc-auth-client/issues/20>`_.
+
+
+Version 0.2.1 (2020-08-26)
+--------------------------
+
 
 - Bug Fix in decorator oauth2: See `commit aa436 <https://github.com/brazil-data-cube/bdc-auth-client/commit/aa43602d25063678e69ba6ff6bd84653a7b20e2b>`_.
 
 
 
-Version 0.2.0
--------------
+Version 0.2.0 (2020-08-20)
+--------------------------
 
-
-Released 2020-08-20
 
 - First experimental version.
 - Based on `BDC-Auth <https://github.com/brazil-data-cube/bdc-auth>`_.
