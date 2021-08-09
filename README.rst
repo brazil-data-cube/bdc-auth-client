@@ -16,13 +16,13 @@ A Client Package for Authentication and Authorization Based on OAuth 2.0
         :alt: Software License
 
 
-.. image:: https://travis-ci.org/brazil-data-cube/bdc-auth-client.svg?branch=master
-        :target: https://travis-ci.org/brazil-data-cube/bdc-auth-client
+.. image:: https://drone.dpi.inpe.br/api/badges/brazil-data-cube/bdc-auth-client/status.svg
+        :target: https://drone.dpi.inpe.br/brazil-data-cube/bdc-auth-client
         :alt: Build Status
 
 
-.. image:: https://coveralls.io/repos/github/brazil-data-cube/bdc-auth-client/badge.svg?branch=master
-        :target: https://coveralls.io/github/brazil-data-cube/bdc-auth-client?branch=master
+.. image:: https://codecov.io/gh/brazil-data-cube/bdc-auth-client/branch/master/graph/badge.svg?token=WNIBF8DN17
+        :target: https://codecov.io/gh/brazil-data-cube/bdc-auth-client
         :alt: Code Coverage Test
 
 
