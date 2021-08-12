@@ -9,6 +9,15 @@
 Changes
 =======
 
+Version 0.2.3 (2021-08-10)
+--------------------------
+
+
+- Add support for OR operations `#25 <https://github.com/brazil-data-cube/bdc-auth-client/issues/25>`_.
+
+- Remove travis CI `#24 <https://github.com/brazil-data-cube/bdc-auth-client/issues/24>`_.
+
+- Add drone support `#18 <https://github.com/brazil-data-cube/bdc-auth-client/issues/18>`_.
 
 Version 0.2.2 (2021-07-12)
 --------------------------
