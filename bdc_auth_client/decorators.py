@@ -64,9 +64,17 @@ def oauth2(roles=None, required=True, throw_exception=True):
                     # Set policy to access the `BDC-Auth`
                     # A policy is associated with Roles.
                     policy = None
+                    policies = []
 
                     if roles:
-                        policy = ','.join(roles)
+                        for role in roles:
+                            if not isinstance(role, (list, tuple)):
+                                policies.append(role)
+                            else:
+                                for r in role:
+                                    policies.append(r)
+
+                        policy = ','.join(policies)
 
                     res = session.fetch_token(
                         current_app.config['BDC_AUTH_ACCESS_TOKEN_URL'], grant_type='introspect',
@@ -82,8 +90,14 @@ def oauth2(roles=None, required=True, throw_exception=True):
                     kwargs.update(dict(user_id=res.get('user_id', None)))
 
                     if roles:
-                        if not set(roles) <= set(user_roles):
-                            abort(403)
+                        for role in roles:
+                            if isinstance(role, (list, tuple)):
+                                if not set(role).intersection(set(user_roles)):
+                                    abort(403)
+                                continue
+
+                            if role not in user_roles:
+                                return abort(403)
 
                     token_cache.add(access_token, res, ttl=60)
                 except Exception as e:

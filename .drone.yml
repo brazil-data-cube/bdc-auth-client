@@ -1,0 +1,41 @@
+#
+# This file is part of BDC-Auth-Client.
+# Copyright (C) 2021 INPE.
+#
+# BDC-Auth-Client is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+kind: pipeline
+name: bdc-auth-client
+
+steps:
+- name: build
+  image: python:3.7
+  commands:
+  - pip install --upgrade pip
+  - pip install --upgrade setuptools
+  - pip install -e .[tests,docs]
+  - ./run-tests.sh
+
+- name: coverage
+  image: plugins/codecov
+  settings:
+    files:
+    - coverage.xml
+    - .coverage
+    token:
+      from_secret: CODECOV_TOKEN
+  when:
+    event:
+    - push
+
+- name: discord-notify
+  image: brazildatacube/bdc-drone-discord
+  settings:
+    webhook:
+      from_secret: discord_webhook
+  when:
+    status:
+      - failure
+      - success
