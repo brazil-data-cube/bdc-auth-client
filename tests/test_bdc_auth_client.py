@@ -86,6 +86,7 @@ def test_decorator_forbidden(requests_mock):
 
 
 def test_decorator_missing_token(requests_mock):
+    """Test when the user does not provide any token."""
     client = get_app_client()
 
     # Missing TOKEN (Required)
@@ -97,6 +98,7 @@ def test_decorator_missing_token(requests_mock):
 
 
 def test_token_optional(requests_mock):
+    """Test when access token is optional."""
     client_non_required = get_app_client(required=False)
     # Missing TOKEN (non-required)
     requests_mock.post(HOST, json=dict(status=True, sub=dict(roles=['admin'])),
@@ -108,6 +110,7 @@ def test_token_optional(requests_mock):
 
 
 def test_remote_server_internal_error(requests_mock):
+    """Test when occurs a error using decorator."""
     client = get_app_client()
 
     expected_code = 500
@@ -123,6 +126,7 @@ def test_remote_server_internal_error(requests_mock):
 
 
 def test_decorator(requests_mock):
+    """Test well-known way to validate a token."""
     client = get_app_client()
 
     # Token OK
