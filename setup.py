@@ -31,6 +31,7 @@ tests_require = [
     'pydocstyle>=4.0',
     'isort>4.3',
     'check-manifest>=0.40',
+    'requests-mock>=1.7'
 ]
 
 extras_require = {
