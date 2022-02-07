@@ -13,10 +13,14 @@ from functools import wraps
 from authlib.integrations.requests_client import OAuth2Session
 from cacheout.cache import Cache
 from flask import abort, current_app, request
+from werkzeug.exceptions import HTTPException
 
-# Define a InMemory cache for development purporse
+# Define a InMemory cache for development purpose
 # Used to prevent `fetch_token` all the time.
 token_cache = Cache(maxsize=512, ttl=3600)
+
+HTTP_403_MSG = 'You don\'t have permission to access this resource.'
+"""Define a generic message related Fordibben Access (403)."""
 
 
 def oauth2(roles=None, required=True, throw_exception=True):
@@ -35,7 +39,7 @@ def oauth2(roles=None, required=True, throw_exception=True):
         >>>
         >>> @app.route('/')
         >>> @oauth2(roles=['admin'])
-        >>> def protected_route(roles=[]):
+        >>> def protected_route(roles=None):
         ...     return dict(status=200)
     """
     def _oauth2(func):
@@ -45,7 +49,7 @@ def oauth2(roles=None, required=True, throw_exception=True):
                             request.args.get('access_token')
             if not access_token:
                 if required:
-                    abort(403, 'Missing access_token parameter.')
+                    abort(401, 'Missing access_token parameter.')
                 return func(*args, **kwargs)
 
             if token_cache.has(access_token):
@@ -81,10 +85,14 @@ def oauth2(roles=None, required=True, throw_exception=True):
                         token=access_token, policy=policy
                     )
 
-                    if 'code' in res:
-                        abort(403)
+                    # Token Expired
+                    if 'status' in res and not res['status']:
+                        abort(401, 'Token expired.')
 
-                    user_roles = res['sub']['roles'] or []
+                    if 'code' in res:
+                        abort(res['code'], HTTP_403_MSG)
+
+                    user_roles = res['sub'].get('roles', [])
                     kwargs.update(dict(roles=user_roles))
                     kwargs.update(dict(access_token=access_token))
                     kwargs.update(dict(user_id=res.get('user_id', None)))
@@ -93,16 +101,19 @@ def oauth2(roles=None, required=True, throw_exception=True):
                         for role in roles:
                             if isinstance(role, (list, tuple)):
                                 if not set(role).intersection(set(user_roles)):
-                                    abort(403)
+                                    abort(403, HTTP_403_MSG)
                                 continue
 
                             if role not in user_roles:
-                                return abort(403)
+                                return abort(403, HTTP_403_MSG)
 
                     token_cache.add(access_token, res, ttl=60)
+                except HTTPException:
+                    if throw_exception:
+                        raise
                 except Exception as e:
                     if throw_exception:
-                        abort(403)
+                        abort(500)
             return func(*args, **kwargs)
         return wrapped
     return _oauth2
