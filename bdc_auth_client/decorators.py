@@ -37,9 +37,9 @@ def oauth2(roles=None, required=True, throw_exception=True):
     Example:
         >>> from bdc_auth_client.decorators import oauth2
         >>>
-        >>> @app.route('/')
-        >>> @oauth2(roles=['admin'])
-        >>> def protected_route(roles=None):
+        >>> @app.route('/')  # doctest: +SKIP
+        ... @oauth2(roles=['admin'])
+        ... def protected_route(roles=None):
         ...     return dict(status=200)
     """
     def _oauth2(func):
