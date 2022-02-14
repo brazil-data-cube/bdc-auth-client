@@ -9,6 +9,15 @@
 Changes
 =======
 
+
+Version 0.4.0 (2022-02-14)
+--------------------------
+
+
+- Improve log handler for expired tokens and generic errors `#16 <https://github.com/brazil-data-cube/bdc-auth-client/issues/16>`_.
+- Improve documentation and usage `#9 <https://github.com/brazil-data-cube/bdc-auth-client/issues/9>`_.
+
+
 Version 0.2.3 (2021-08-12)
 --------------------------
 

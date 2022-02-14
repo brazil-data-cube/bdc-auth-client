@@ -8,8 +8,10 @@
 
 """User authentication and authorization system for BDC."""
 
+from .decorators import oauth2
 from .version import __version__
 
 __all__ = (
+    'oauth2',
     '__version__',
 )
