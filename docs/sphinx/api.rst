@@ -10,6 +10,5 @@ Python API
 ==========
 
 
-**(Under Development)**
-
-
+.. automodule:: bdc_auth_client.decorators
+    :members:

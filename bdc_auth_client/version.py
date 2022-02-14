@@ -8,4 +8,4 @@
 
 """Version information for BDC-Auth-Client."""
 
-__version__ = '0.2.3'
+__version__ = '0.4.0'
