@@ -1,6 +1,6 @@
 #
 # This file is part of BDC-Auth-Client.
-# Copyright (C) 2020 INPE.
+# Copyright (C) 2022 INPE.
 #
 # BDC-Auth-Client is a free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -49,7 +49,7 @@ setup_requires = [
 install_requires = [
     'cacheout>=0.11,<1',
     'Flask>=1.1',
-    'Authlib>=0.14',
+    'Authlib>=0.14,<1.1',
     'requests>=2.20',
 ]
 
