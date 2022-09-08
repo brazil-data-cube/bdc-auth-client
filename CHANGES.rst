@@ -1,6 +1,6 @@
 ..
     This file is part of BDC-Auth-Client.
-    Copyright (C) 2020 INPE.
+    Copyright (C) 2022 INPE.
 
     BDC-Auth-Client is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
@@ -8,6 +8,13 @@
 
 Changes
 =======
+
+
+Version 0.4.1 (2022-09-08)
+--------------------------
+
+- Fix exception when OAuth2 servers delivery a expired token (Authlib 1.0+) (`#31 <https://github.com/brazil-data-cube/bdc-auth-client/issues/31>`_)
+- Update license headers date
 
 
 Version 0.4.0 (2022-02-14)
@@ -35,7 +42,7 @@ Version 0.2.2 (2021-07-12)
 - Retrieve user id in decorators `#20 <https://github.com/brazil-data-cube/bdc-auth-client/issues/20>`_.
 
 
-Version 0.2.1 (2020-08-26)
+Version 0.2.1 (2022-08-26)
 --------------------------
 
 
@@ -43,7 +50,7 @@ Version 0.2.1 (2020-08-26)
 
 
 
-Version 0.2.0 (2020-08-20)
+Version 0.2.0 (2022-08-20)
 --------------------------
 
 

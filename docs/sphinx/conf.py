@@ -1,6 +1,6 @@
 #
 # This file is part of BDC-Auth.
-# Copyright (C) 2019-2020 INPE.
+# Copyright (C) 2019-2022 INPE.
 #
 # BDC-Auth is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -19,7 +19,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'BDC-Auth-Client'
-copyright = '2020, INPE'
+copyright = '2022, INPE'
 author = 'Brazil Data Cube Team'
 release = bdc_auth_client.__version__
 
