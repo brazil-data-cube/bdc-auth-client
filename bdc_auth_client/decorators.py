@@ -1,6 +1,6 @@
 #
 # This file is part of BDC-Auth-Client.
-# Copyright (C) 2020 INPE.
+# Copyright (C) 2022 INPE.
 #
 # BDC-Auth-Client is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -17,7 +17,7 @@ from werkzeug.exceptions import HTTPException
 
 # Define a InMemory cache for development purpose
 # Used to prevent `fetch_token` all the time.
-token_cache = Cache(maxsize=512, ttl=3600)
+token_cache = Cache(maxsize=512, ttl=600)
 
 HTTP_403_MSG = 'You don\'t have permission to access this resource.'
 """Define a generic message related Fordibben Access (403)."""
@@ -89,8 +89,9 @@ def oauth2(roles=None, required=True, throw_exception=True):
                     if 'status' in res and not res['status']:
                         abort(401, 'Token expired.')
 
-                    if 'code' in res:
-                        abort(res['code'], HTTP_403_MSG)
+                    expired = res.get('active')
+                    if 'code' in res or (expired is not None and not expired):
+                        abort(403, HTTP_403_MSG)
 
                     user_roles = res['sub'].get('roles', [])
                     kwargs.update(dict(roles=user_roles))
