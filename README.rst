@@ -60,11 +60,11 @@ Installation
 See `INSTALL.rst <./INSTALL.rst>`_.
 
 
-Running
-=======
+Usage
+=====
 
 
-See `USING.rst <./USING.rst>`_.
+See `USAGE.rst <./USAGE.rst>`_.
 
 
 Developer Documentation

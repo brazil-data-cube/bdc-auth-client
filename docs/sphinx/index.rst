@@ -20,22 +20,21 @@
    :end-before: Installation
 
 
-Documentation
-=============
-
-
 .. toctree::
     :hidden:
 
     self
 
 
+Documentation
+=============
+
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    installation
-   using
+   usage
    api
    license
 

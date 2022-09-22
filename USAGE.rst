@@ -16,8 +16,8 @@
     along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 
-Using BDC-Auth-App
-==================
+Usage
+=====
 
 This modules uses `Authlib <https://docs.authlib.org/en/latest/index.html>`_ implementation to communicate with Brazil Data Cube OAuth2.
 You can also use this module for others OAuth 2.0 server as is.
