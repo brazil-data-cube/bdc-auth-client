@@ -99,14 +99,17 @@ def oauth2(roles=None, required=True, throw_exception=True):
                     if 'status' in res and not res['status']:
                         abort(401, 'Token expired.')
 
-                    expired = res.get('active')
-                    if 'code' in res or (expired is not None and not expired):
+                    active = res.get('active')
+                    if 'code' in res or (active is not None and not active):
                         abort(403, HTTP_403_MSG)
 
                     user_roles = res['sub'].get('roles', [])
                     kwargs.update(dict(roles=user_roles))
                     kwargs.update(dict(access_token=access_token))
                     kwargs.update(dict(user_id=res.get('user_id', None)))
+                    for key, value in res['sub'].items():
+                        if key != 'roles':
+                            kwargs.update({key: value})
 
                     if roles:
                         for role in roles:

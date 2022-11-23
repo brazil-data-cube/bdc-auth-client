@@ -20,6 +20,12 @@ Changes
 =======
 
 
+Version 0.4.3 (2022-11-23)
+--------------------------
+
+- Expand all keys from token introspection in request context (`#36 <https://github.com/brazil-data-cube/bdc-auth-client/issues/36>`_)
+
+
 Version 0.4.2 (2022-09-22)
 --------------------------
 
