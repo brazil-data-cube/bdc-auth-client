@@ -127,7 +127,8 @@ def oauth2(roles=None, required=True, throw_exception=True):
                         raise
                 except Exception as e:
                     if throw_exception:
-                        abort(500)
+                        code = e.response.status_code if hasattr(e, 'response') else 500
+                        abort(code)
             return func(*args, **kwargs)
         return wrapped
     return _oauth2
