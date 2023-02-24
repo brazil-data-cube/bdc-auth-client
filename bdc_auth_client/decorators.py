@@ -67,6 +67,8 @@ def oauth2(roles=None, required=True, throw_exception=True):
                 kwargs.update(dict(roles=res['sub']['roles'] or []))
                 kwargs.update(dict(access_token=access_token))
                 kwargs.update(dict(user_id=res.get('user_id', None)))
+                kwargs.update(dict(user=res['sub']['user'] or []))
+                
 
             else:
                 session = OAuth2Session(
@@ -104,9 +106,11 @@ def oauth2(roles=None, required=True, throw_exception=True):
                         abort(403, HTTP_403_MSG)
 
                     user_roles = res['sub'].get('roles', [])
+                    user = res['sub'].get('user', [])
                     kwargs.update(dict(roles=user_roles))
                     kwargs.update(dict(access_token=access_token))
                     kwargs.update(dict(user_id=res.get('user_id', None)))
+                    kwargs.update(dict(user=user))
                     for key, value in res['sub'].items():
                         if key != 'roles':
                             kwargs.update({key: value})
